@@ -8,21 +8,31 @@ l3 = float(input("Terceiro valor: "))
 print("\n", "="*30, "\n")
 
 
-def e_triangulo(lado1, lado2, lado3):
+def e_triangulo(lado1: float, lado2: float, lado3: float) -> tuple:
+    """
+    Função que recebe três valores de retas e verifica se formam um triangulo e qual o tipo.
+    :param lado1: (float) qualquer valor > 0
+    :param lado2: (float) qualquer valor > 0
+    :param lado3: (float) qualquer valor > 0
+    :return: (bool, str) bool: True se for triangulo, str: tipo do triângulo
+    """
     # Analisa sé é triangulo e qual o tipo do triângulo
     lados = {lado1, lado2, lado3}  # Foi utilizado a função set para eliminar valores iguais
     if lado1 + lado2 > lado3 and lado1 + lado3 > lado2 and lado2 + lado3 > lado1:
-        # Algoritmo para determinar se três retas são um triângulo
-        print("Os valores correspondem a um Triangulo do tipo:")
-    if len(lados) == 1:  # dois valores eliminados, então os três são iguais
-        return print("Equilátero - três lados iguais;")
-    if len(lados) == 2:  # um valor eliminado, então dois são iguais
-        return print("Isósceles - quaisquer dois lados iguais;")
-    if len(lados) == 3:  # Nenhum valor eliminado, então três diferentes
-        return print("Escaleno - três lados diferentes;")
+        # algoritmo para determinar se três retas são um triângulo
+        if len(lados) == 1:  # dois valores eliminados, então os três são iguais
+            return True, "Equilátero"
+        elif len(lados) == 2:  # um valor eliminado, então dois são iguais
+            return True, "Isósceles"
+        elif len(lados) == 3:  # Nenhum valor eliminado, então três diferentes
+            return True, "Escaleno"
     else:
-        return print("Os valores não correspondem a um Triangulo")
+        return False, "Inválido"
 
 
-e_triangulo(l1, l2, l3)
+resultado, tipo = e_triangulo(l1, l2, l3)
+if resultado:
+    print(f"É um triângulo do tipo {tipo}")
+else:
+    print(f"{tipo}, um triângulo não pode ser formado com esses valores.")
 print("\n", "="*30, "\n")
